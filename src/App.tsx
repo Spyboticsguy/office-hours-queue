@@ -15,10 +15,10 @@ export type Student = {
 };
 
 class App extends Component<AppProps, AppState> {
-  private buffer: string[] = [];
+  private buffer: string[];
   // max length of internal string buffer
-  private bufferLimit = 16;
-  private bufferCheckThreshold = 15;
+  private BUFFER_LIMIT = 16;
+  private BUFFER_CHECK_THRESHOLD = 15;
 
   constructor(props: AppProps) {
     super(props);
@@ -26,6 +26,8 @@ class App extends Component<AppProps, AppState> {
     this.state = {
       queue: [],
     };
+
+    this.buffer = [];
 
     this.onGlobalKeyPress = this.onGlobalKeyPress.bind(this);
     this.addStudent = this.addStudent.bind(this);
@@ -69,12 +71,12 @@ class App extends Component<AppProps, AppState> {
   private onGlobalKeyPress(ev: KeyboardEvent) {
     this.buffer.push(ev.key);
     // remove oldest element if we are over buffer size
-    if (this.buffer.length > this.bufferLimit) {
+    if (this.buffer.length > this.BUFFER_LIMIT) {
       this.buffer.shift();
     }
 
     // if we are over the threshold for checking for a buzzcard, do it
-    if (this.buffer.length > this.bufferCheckThreshold) {
+    if (this.buffer.length > this.BUFFER_CHECK_THRESHOLD) {
       this.checkBuzzcard();
     }
 
