@@ -4,14 +4,16 @@ import QueueEntry from "./QueueEntry";
 
 type QueueListProps = {
   students: Student[],
+  onRemove: (GTID: number) => () => void,
 };
 
 export default function QueueList(props: QueueListProps): JSX.Element {
-  const studentEntries: JSX.Element[] = props.students.map((student, index) => (
+  const studentEntries: JSX.Element[] = props.students.map((student) => (
     <QueueEntry
       key={student.id}
       studentName={student.name}
-      className="col-12"
+      className="col-12 my-1"
+      onRemove={props.onRemove(student.id)}
     />
   ));
 

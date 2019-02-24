@@ -59,7 +59,10 @@ class App extends Component<AppProps, AppState> {
         <div className="container mt-3">
           <div className="row">
             <div className="col-sm-9">
-              <Queue students={this.state.queue} />
+              <Queue
+                students={this.state.queue}
+                onRemove={this.removeStudent}
+              />
             </div>
           </div>
         </div>
@@ -114,6 +117,22 @@ class App extends Component<AppProps, AppState> {
           ...this.state.queue,
           {name: GTID.toString(), id: GTID},
         ],
+      });
+    }
+  }
+
+  // removes the student with the given GTID from the queue. Curried.
+  private removeStudent = (GTID: number) => () => {
+    // get copy of the queue to modify without changing state
+    const newQueue = [...this.state.queue];
+    const indexOfStudent = newQueue.findIndex((value) => {
+      return value.id === GTID;
+    });
+
+    if (indexOfStudent >= 0) {
+      newQueue.splice(indexOfStudent, 1);
+      this.setState({
+        queue: newQueue,
       });
     }
   }
