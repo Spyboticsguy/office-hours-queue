@@ -4,7 +4,7 @@ import QueueEntry from "./QueueEntry";
 
 type QueueListProps = {
   students: Student[],
-  onRemove: (GTID: number) => () => void,
+  onRemove: (hashedGTID: string) => () => void,
 };
 
 export default function QueueList(props: QueueListProps): JSX.Element {

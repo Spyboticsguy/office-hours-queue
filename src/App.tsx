@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Authentication from "./Authentication";
 import Header from "./Header";
 import logo from "./logo.png";
 import Queue from "./Queue";
@@ -10,7 +11,7 @@ type AppState = {
 };
 
 export type Student = {
-  id: number;
+  id: string;
   name: string;
 };
 
@@ -108,25 +109,26 @@ class App extends Component<AppProps, AppState> {
 
   // only adds a student to the queue if they are not already in the queue
   private addStudent(GTID: number) {
+    const hashedGTID = Authentication.hashGTID(GTID);
     // look for student in queue; if not found, add them.
     if (!this.state.queue.find((student) => {
-      return student.id === GTID;
+      return student.id === hashedGTID;
     })) {
       this.setState({
         queue: [
           ...this.state.queue,
-          {name: GTID.toString(), id: GTID},
+          {name: GTID.toString(), id: hashedGTID},
         ],
       });
     }
   }
 
-  // removes the student with the given GTID from the queue. Curried.
-  private removeStudent = (GTID: number) => () => {
+  // removes the student with the given hashed GTID from the queue. Curried.
+  private removeStudent = (hashedGTID: string) => () => {
     // get copy of the queue to modify without changing state
     const newQueue = [...this.state.queue];
     const indexOfStudent = newQueue.findIndex((value) => {
-      return value.id === GTID;
+      return value.id === hashedGTID;
     });
 
     if (indexOfStudent >= 0) {
