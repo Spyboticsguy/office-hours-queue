@@ -20,6 +20,7 @@ class App extends Component<AppProps, AppState> {
   // max length of internal string buffer
   private BUFFER_LIMIT = 16;
   private BUFFER_CHECK_THRESHOLD = 15;
+  private auth = new Authentication();
 
   constructor(props: AppProps) {
     super(props);
@@ -100,7 +101,10 @@ class App extends Component<AppProps, AppState> {
       // slice off garbage at front of buzzcard read
       const foundGTID = bufferMatch[0].substring(6);
       // add student
-      this.addStudent(+foundGTID);
+      const student = this.auth.lookupStudent(+foundGTID);
+      if (student) {
+        this.addStudent(student);
+      }
     }
 
     // clear buffer whenever we check for a new buzzcard number
@@ -108,16 +112,15 @@ class App extends Component<AppProps, AppState> {
   }
 
   // only adds a student to the queue if they are not already in the queue
-  private addStudent(GTID: number) {
-    const hashedGTID = Authentication.hashGTID(GTID);
+  private addStudent(student: Student) {
     // look for student in queue; if not found, add them.
-    if (!this.state.queue.find((student) => {
-      return student.id === hashedGTID;
+    if (!this.state.queue.find((studentInQueue) => {
+      return student.id === studentInQueue.id;
     })) {
       this.setState({
         queue: [
           ...this.state.queue,
-          {name: GTID.toString(), id: hashedGTID},
+          student,
         ],
       });
     }
