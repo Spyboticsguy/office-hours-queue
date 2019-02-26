@@ -4,6 +4,7 @@ import Authentication from "./Authentication";
 import Header from "./Header";
 import logo from "./logo.png";
 import Queue from "./Queue";
+import Uploader from "./Uploader";
 
 type AppProps = {};
 type AppState = {
@@ -64,6 +65,9 @@ class App extends Component<AppProps, AppState> {
               <Queue
                 students={this.state.queue}
                 onRemove={this.removeStudent}
+              />
+              <Uploader
+                onFileSubmit={() => null}
               />
             </div>
           </div>
