@@ -1,23 +1,44 @@
-# GT Office Hours Queue
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This web application was designed to streamline the process of keeping track of students during office hours, using a Buzzcard scanner.
+## Available Scripts
 
-Created by Deb ⋅ Made with ♥
+In the project directory, you can run:
 
-## FERPA Notice
+### `npm start`
 
-The application is completely FERPA compliant, but as such has a few limitations, such as the roster needing to be reloaded whenever the application is refreshed. No student information is stored in cookies or remotely. As a side effect of this, the application is completely static and requires no internet access. The only student information required by the application are names and GTIDs, the latter of which are stored using SHA-512 cryptographic hashes.
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Importing the Roster
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-A sample roster, matching the Canvas format can be found in the root of the repository. (`sample-roster.xlsx`) Make sure the roster you use matches this format, though not all of the information is required. You can get the roster from Canvas, under _GaTech Roster -> Export Roster_. Feeding this roster into the application's roster generation utility will generate a new roster with encrypted GTIDs, in a format which can then be used by the application. Once you do this, is is **highly** recommended that you delete the local copy of your Canvas roster. You only need to carry out the roster generation step once per class.
+### `npm test`
 
-## Using the App
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-After you've converted the roster file, using the application should be fairly self explanatory. Note that you'll have to connect a Buzzcard scanner to use the scanning features.
+### `npm run build`
 
-A deployed version can be found at [oh.debkbanerji.com](https://oh.debkbanerji.com)
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-If the computer you're using to run the app doesn't have access to the internet, you can either build your own version of the app using `npm` (the scripts in `package.json` should be fairly self explanatory) or grab a built version from [releases](https://github.com/debkbanerji/office-hours-queue/releases).
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-A side effect of running the app locally is that without access to the internet, links in the roster to pictures of the T.A.s won't work. You can get around this issue by placing these images directly in the `assets` folder and linking directly to these while choosing image links in the roster generation utility.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
