@@ -35,6 +35,9 @@ jobs:
 
       # build the project
       - run: yarn build
+      - store_artifacts:
+          path: ~/repo/build
+
   test:
     docker:
       - image: circleci/node:11.7
