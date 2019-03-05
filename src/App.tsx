@@ -34,6 +34,7 @@ class App extends Component<AppProps, AppState> {
 
     this.onGlobalKeyPress = this.onGlobalKeyPress.bind(this);
     this.addStudent = this.addStudent.bind(this);
+    this.handleRosterFileSubmit = this.handleRosterFileSubmit.bind(this);
   }
 
   public componentDidMount() {
@@ -67,7 +68,7 @@ class App extends Component<AppProps, AppState> {
                 onRemove={this.removeStudent}
               />
               <Uploader
-                onFileSubmit={() => null}
+                onFileSubmit={this.handleRosterFileSubmit}
               />
             </div>
           </div>
@@ -144,6 +145,16 @@ class App extends Component<AppProps, AppState> {
         queue: newQueue,
       });
     }
+  }
+
+  // handles the roster file upload
+  private handleRosterFileSubmit(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) {
+      // check if the given file list exists
+      return;
+    }
+    const uploadedFile = event.target.files[0];
+    this.auth.convertRosterToJson(uploadedFile);
   }
 }
 
